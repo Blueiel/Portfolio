@@ -9,7 +9,9 @@ export async function POST(req: NextRequest) {
   }
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -19,7 +21,7 @@ export async function POST(req: NextRequest) {
   try {
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER, // sends to yourself
+      to: process.env.EMAIL_TO!,
       replyTo: email,
       subject: `New message from ${name}`,
       html: `
@@ -33,7 +35,6 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     });
-
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error(err);
