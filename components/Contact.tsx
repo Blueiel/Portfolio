@@ -10,8 +10,7 @@ export default function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setStatus("sending");
 
     try {
@@ -144,15 +143,18 @@ export default function Contact() {
                 </p>
               )}
               <button
-                onClick={handleSubmit}
+                onClick={() => void handleSubmit()}
                 disabled={status === "sending" || !form.name || !form.email || !form.message}
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",
                   padding: "0.85rem", background: "#3b82f6", color: "#fff",
                   border: "none", borderRadius: "6px", fontWeight: 600, fontSize: "0.9rem",
-                  cursor: "pointer", letterSpacing: "0.05em", transition: "all 0.2s",
+                  cursor: !form.name || !form.email || !form.message ? "not-allowed" : "pointer",
+                  letterSpacing: "0.05em", transition: "all 0.2s",
                   opacity: !form.name || !form.email || !form.message ? 0.5 : 1,
                   fontFamily: "inherit", width: "100%",
+                  WebkitAppearance: "none",
+                  touchAction: "manipulation",
                 }}
                 onMouseEnter={(e) => { if (form.name && form.email && form.message) (e.currentTarget as HTMLElement).style.background = "#2563eb"; }}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#3b82f6")}

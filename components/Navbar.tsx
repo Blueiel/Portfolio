@@ -82,9 +82,9 @@ export default function Navbar() {
               style={{ display: "block", padding: "0.85rem 0", color: "var(--text-secondary)", textDecoration: "none", borderBottom: "1px solid rgba(59,130,246,0.08)", fontSize: "1rem" }}
             >{link.label}</a>
           ))}
-          <a href="/resume.pdf" target="_blank" onClick={() => setMenuOpen(false)}
-            style={{ display: "block", marginTop: "1rem", padding: "0.75rem", textAlign: "center", border: "1px solid #3b82f6", borderRadius: "4px", color: "#3b82f6", textDecoration: "none", fontSize: "0.9rem" }}
-          >Resume</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}
+    style={{ display: "block", marginTop: "1rem", padding: "0.75rem", textAlign: "center", border: "1px solid #3b82f6", borderRadius: "4px", color: "#3b82f6", textDecoration: "none", fontSize: "0.9rem" }}
+  >Hire Me</a>
         </div>
       )}
     </>
