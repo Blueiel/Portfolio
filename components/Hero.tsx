@@ -204,7 +204,7 @@ export default function Hero() {
           }}
         >
           <a
-            href="#projects"
+            href="/Projects"
             style={{
               padding: "0.75rem 2rem",
               background: "#3b82f6",
@@ -226,7 +226,7 @@ export default function Hero() {
             View Projects
           </a>
           <a
-            href="#contact"
+            href="/Contact"
             style={{
               padding: "0.75rem 2rem",
               border: "1px solid rgba(59,130,246,0.4)",
@@ -299,7 +299,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <a
-        href="#about"
+        href="/About"
         style={{
           position: "absolute",
           bottom: "2rem",

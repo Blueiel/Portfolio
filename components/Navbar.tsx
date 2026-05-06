@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "About", href: "About" },
-  { label: "Skills", href: "Skills" },
-  { label: "Experience", href: "Experience" },
-  { label: "Projects", href: "Projects" },
+  { label: "About", id: "about" },
+  { label: "Skills", id: "skills" },
+  { label: "Experience", id: "experience" },
+  { label: "Projects", id: "projects" },
 ];
 
 export default function Navbar() {
@@ -18,6 +18,12 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
 
   return (
     <>
@@ -39,26 +45,29 @@ export default function Navbar() {
         backdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(59,130,246,0.15)" : "none",
       }}>
-        <a href="#hero" style={{ fontWeight: 700, fontSize: "1.1rem", letterSpacing: "0.08em", color: "#3b82f6", textDecoration: "none" }}>
-          &lt;Nielmharr Chavez /&gt;
-        </a>
+        <button onClick={() => scrollTo("hero")}
+          style={{ fontWeight: 700, fontSize: "1.1rem", letterSpacing: "0.08em", color: "#3b82f6", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit" }}>
+          &lt;Blueiel /&gt;
+        </button>
 
         {/* Desktop links */}
         <ul className="nav-desktop" style={{ gap: "2rem", listStyle: "none", alignItems: "center" }}>
           {navLinks.map((link) => (
-            <li key={link.href}>
-              <a href={link.href} style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "0.875rem", letterSpacing: "0.05em", transition: "color 0.2s" }}
+            <li key={link.id}>
+              <button onClick={() => scrollTo(link.id)}
+                style={{ color: "var(--text-secondary)", background: "none", border: "none", fontSize: "0.875rem", letterSpacing: "0.05em", transition: "color 0.2s", cursor: "pointer", fontFamily: "inherit" }}
                 onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#3b82f6")}
                 onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--text-secondary)")}
-              >{link.label}</a>
+              >{link.label}</button>
             </li>
           ))}
           <li>
-          <a href="#contact" style={{ padding: "0.4rem 1rem", border: "1px solid #3b82f6", borderRadius: "4px", color: "#3b82f6", textDecoration: "none", fontSize: "0.875rem", transition: "all 0.2s" }}
-            onMouseEnter={(e) => { const el = e.target as HTMLElement; el.style.background = "#3b82f6"; el.style.color = "#fff"; }}
-            onMouseLeave={(e) => { const el = e.target as HTMLElement; el.style.background = "transparent"; el.style.color = "#3b82f6"; }}
-          >Hire Me</a>
-        </li>
+            <button onClick={() => scrollTo("contact")}
+              style={{ padding: "0.4rem 1rem", border: "1px solid #3b82f6", borderRadius: "4px", color: "#3b82f6", background: "transparent", fontSize: "0.875rem", transition: "all 0.2s", cursor: "pointer", fontFamily: "inherit" }}
+              onMouseEnter={(e) => { const el = e.target as HTMLElement; el.style.background = "#3b82f6"; el.style.color = "#fff"; }}
+              onMouseLeave={(e) => { const el = e.target as HTMLElement; el.style.background = "transparent"; el.style.color = "#3b82f6"; }}
+            >Hire Me</button>
+          </li>
         </ul>
 
         {/* Hamburger */}
@@ -78,13 +87,13 @@ export default function Navbar() {
           backdropFilter: "blur(16px)",
         }}>
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}
-              style={{ display: "block", padding: "0.85rem 0", color: "var(--text-secondary)", textDecoration: "none", borderBottom: "1px solid rgba(59,130,246,0.08)", fontSize: "1rem" }}
-            >{link.label}</a>
+            <button key={link.id} onClick={() => scrollTo(link.id)}
+              style={{ display: "block", width: "100%", textAlign: "left", padding: "0.85rem 0", color: "var(--text-secondary)", background: "none", border: "none", borderBottom: "1px solid rgba(59,130,246,0.08)", fontSize: "1rem", cursor: "pointer", fontFamily: "inherit" }}
+            >{link.label}</button>
           ))}
-          <a href="contact" onClick={() => setMenuOpen(false)}
-    style={{ display: "block", marginTop: "1rem", padding: "0.75rem", textAlign: "center", border: "1px solid #3b82f6", borderRadius: "4px", color: "#3b82f6", textDecoration: "none", fontSize: "0.9rem" }}
-  >Hire Me</a>
+          <button onClick={() => scrollTo("contact")}
+            style={{ display: "block", width: "100%", marginTop: "1rem", padding: "0.75rem", textAlign: "center", border: "1px solid #3b82f6", borderRadius: "4px", color: "#3b82f6", background: "transparent", fontSize: "0.9rem", cursor: "pointer", fontFamily: "inherit" }}
+          >Hire Me</button>
         </div>
       )}
     </>
