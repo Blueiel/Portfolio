@@ -1,9 +1,17 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { type MouseEvent, useEffect, useRef } from "react";
 import { ArrowDown, GitFork, Link2, Mail } from "lucide-react";
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const scrollToSection = (
+    event: MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    event.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   // Particle animation
   useEffect(() => {
@@ -205,6 +213,7 @@ export default function Hero() {
         >
           <a
             href="#projects"
+            onClick={(e) => scrollToSection(e, "projects")}
             style={{
               padding: "0.75rem 2rem",
               background: "#3b82f6",
@@ -227,6 +236,7 @@ export default function Hero() {
           </a>
           <a
             href="#contact"
+            onClick={(e) => scrollToSection(e, "contact")}
             style={{
               padding: "0.75rem 2rem",
               border: "1px solid rgba(59,130,246,0.4)",
